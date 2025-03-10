@@ -6,9 +6,9 @@ import Stats from "./Stats";
 
 const Home = () => {
   return (
-    <div className="">
+    <div className="home">
       <Navbar />
-      <div className="">
+      <div className="content">
         <Routes>
           <Route path="/" element={<Feed />} />
           <Route path="stats" element={<Stats />} />
