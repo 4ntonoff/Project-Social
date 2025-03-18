@@ -18,7 +18,6 @@ const Feed = () => {
     getPosts();
   }, []);
 
-  //TODO: Add loading spinner
   if (!posts) {
     return <div className="loader"></div>;
   }

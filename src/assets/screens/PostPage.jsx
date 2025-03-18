@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Heart, ThumbsDown, Eye } from "lucide-react";
 
 const PostPage = () => {
   // TODO: read about useParams
@@ -32,28 +32,58 @@ const PostPage = () => {
     fetchPostComments();
   }, [id]);
 
-  //TODO: Add loading spinner
   if (!post || !postComments) {
     return <div className="loader"></div>;
   }
 
-  //TODO add styling
   return (
-    <div className="">
-      <Link to="/" className="">
-        <ArrowLeft size={24} />
-      </Link>
-      <h1 className="">{post.title}</h1>
-      <p className="">{post.body}</p>
-      <div className="">
-        <h2 className="">Комментарии</h2>
-
-        {postComments.comments.map((postComment) => (
-          <div key={postComment.id} className="">
-            <h3 className="">{postComment.user.fullName}</h3>
-            <p className="">{postComment.body}</p>
+    <div className="post-page">
+      <div className="post-page-back">
+        <Link to="/">
+          <ArrowLeft className="post-page-back-arrow" size={24} />
+        </Link>
+        <span className="post-page-back-text">Post</span>
+      </div>
+      <div className="post-page-content">
+        <h1 className="post-page-title">{post.title}</h1>
+        <p className="post-page-text">{post.body}</p>
+        <div className="post-preview-rating">
+          <div>
+            <Heart />
+            <p>{post.reactions.likes}</p>
           </div>
-        ))}
+          <div>
+            <ThumbsDown />
+            <p>{post.reactions.dislikes}</p>
+          </div>
+          <div>
+            <Eye />
+            <p>{post.views}</p>
+          </div>
+        </div>
+        <div className="post-page-comments">
+          {postComments.comments.map((postComment) => (
+            <>
+              <div key={postComment.id} className="post-page-comment-section">
+                <div className="post-page-comment-header">
+                  <div className="post-page-comment-user">
+                    <span className="post-page-comment-name">
+                      {postComment.user.fullName}
+                    </span>
+                    <span className="post-page-comment-username">
+                      @{postComment.user.username}
+                    </span>
+                  </div>
+                  <div>
+                    <Heart />
+                    <p>{postComment.likes}</p>
+                  </div>
+                </div>
+                <p className="post-page-comment-text">{postComment.body}</p>
+              </div>
+            </>
+          ))}
+        </div>
       </div>
     </div>
   );
