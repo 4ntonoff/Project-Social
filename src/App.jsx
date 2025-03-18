@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Registration from "./assets/screens/Registration";
 import Home from "./assets/screens/Home";
-import Stats from "./assets/screens/Stats";
 import ProtectedRoute from "./assets/screens/ProtectedRoute";
 
 function App() {

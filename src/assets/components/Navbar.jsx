@@ -32,7 +32,7 @@ const Navbar = () => {
           localStorage.removeItem("user");
           window.location.reload();
         }}
-        className="sign-out navbar-item"
+        className="navbar-item"
       >
         <LogOut size={20} />
         <span>Log out</span>

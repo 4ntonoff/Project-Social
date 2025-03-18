@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Feed from "./Feed";
 import Stats from "./Stats";
+import PostPage from "./PostPage";
 
 const Home = () => {
   return (
@@ -11,6 +12,7 @@ const Home = () => {
       <div className="content">
         <Routes>
           <Route path="/" element={<Feed />} />
+          <Route path="post/:id" element={<PostPage />} />
           <Route path="stats" element={<Stats />} />
         </Routes>
       </div>
