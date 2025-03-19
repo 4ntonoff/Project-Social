@@ -29,7 +29,7 @@ const PostPage = () => {
   useEffect(() => {
     fetchPost();
     fetchPostComments();
-  }, []);
+  });
 
   if (!post || !postComments) {
     return <div className="loader"></div>;
