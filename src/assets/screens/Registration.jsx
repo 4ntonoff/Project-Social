@@ -22,11 +22,11 @@ const Registration = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!name || !email || !password) {
-      setError("Ввсе поля обязательны!");
+      setError("All fields are required!");
       return;
     }
     if (!validateEmail(email)) {
-      setError("Неверный формат email");
+      setError("Email not valid!");
       return;
     }
     localStorage.setItem("user", JSON.stringify({ name, email }));

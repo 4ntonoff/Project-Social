@@ -8,29 +8,28 @@ const PostPage = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [postComments, setPostComments] = useState(null);
-
+  async function fetchPost() {
+    try {
+      const response = await axios.get(`https://dummyjson.com/posts/${id}`);
+      setPost(response.data);
+    } catch (error) {
+      console.error("Error loading post:", error);
+    }
+  }
+  async function fetchPostComments() {
+    try {
+      const response = await axios.get(
+        `https://dummyjson.com/posts/${id}/comments`
+      );
+      setPostComments(response.data);
+    } catch (error) {
+      console.error("Error loading post:", error);
+    }
+  }
   useEffect(() => {
-    async function fetchPost() {
-      try {
-        const response = await axios.get(`https://dummyjson.com/posts/${id}`);
-        setPost(response.data);
-      } catch (error) {
-        console.error("Ошибка загрузки поста:", error);
-      }
-    }
     fetchPost();
-    async function fetchPostComments() {
-      try {
-        const response = await axios.get(
-          `https://dummyjson.com/posts/${id}/comments`
-        );
-        setPostComments(response.data);
-      } catch (error) {
-        console.error("Ошибка загрузки поста:", error);
-      }
-    }
     fetchPostComments();
-  }, [id]);
+  }, []);
 
   if (!post || !postComments) {
     return <div className="loader"></div>;

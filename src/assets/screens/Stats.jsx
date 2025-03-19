@@ -56,7 +56,7 @@ const Stats = () => {
       {
         label: "Amount",
         data: [likes, dislikes, views],
-        backgroundColor: ["#2D659F", "#5B568F", "#B64E4E"],
+        backgroundColor: ["#0F5088", "#4F0F75", "#B9201E"],
         borderColor: "black",
         borderWidth: 0.5,
       },
@@ -66,6 +66,7 @@ const Stats = () => {
   const likesData = posts.map((post) => post.reactions.likes);
   const dislikesData = posts.map((post) => post.reactions.dislikes);
   const viewsData = posts.map((post) => post.views);
+
   return (
     <div className="stats">
       <h1>Stats</h1>

@@ -1,14 +1,4 @@
 @font-face {
-  font-family: "Syncrone";
-  src: url(./assets/fonts/Syncrone.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: "Involve";
-  src: url(./assets/fonts/Involve-Regular.ttf) format("truetype");
-}
-
-@font-face {
   font-family: "Lineyka";
   src: url(./assets/fonts/Lineyka.ttf) format("truetype");
 }
