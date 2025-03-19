@@ -7,7 +7,7 @@ import ProtectedRoute from "./assets/screens/ProtectedRoute";
 function App() {
   return (
     <>
-      <Router>
+      <Router basename="/Project-Social">
         <Routes>
           <Route path="/" element={<Registration />} />
           <Route

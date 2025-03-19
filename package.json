@@ -1,7 +1,6 @@
 {
   "name": "social",
-  "homepage": "https://4ntonoff.github.io/Project-Social",
-  "private": true,
+  "homepage": "https://4ntonoff.github.io/Project-Social/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

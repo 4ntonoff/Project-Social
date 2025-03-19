@@ -1,8 +1,9 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { ChartNoAxesCombined, Newspaper, LogOut } from "lucide-react";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <nav className="navbar-items">
       <div className="navbar">
@@ -30,7 +31,7 @@ const Navbar = () => {
       <button
         onClick={() => {
           localStorage.removeItem("user");
-          window.location.reload();
+          navigate("/", { replace: true });
         }}
         className="navbar-item"
       >
