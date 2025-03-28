@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,14 +10,31 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
 export default function BarChart({ data, name }) {
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend
+  // Зачем использовать useMemo, разве не лучше чтоб данные пересчитывались каждый раз?
+
+  const chartData = useMemo(
+    () => ({
+      labels: data.map((_, index) => `Post ${index + 1}`),
+      datasets: [
+        {
+          label: name,
+          data,
+          backgroundColor: "#880F10",
+          borderRadius: 3,
+        },
+      ],
+    }),
+    [data, name]
   );
 
   const options = {
@@ -36,18 +53,6 @@ export default function BarChart({ data, name }) {
         color: "#e6e6e6",
       },
     },
-  };
-
-  const chartData = {
-    labels: data.map((_, index) => `Post ${index + 1}`),
-    datasets: [
-      {
-        label: name,
-        data: data,
-        backgroundColor: "#880F10",
-        borderRadius: 3,
-      },
-    ],
   };
 
   return <Bar options={options} data={chartData} />;
