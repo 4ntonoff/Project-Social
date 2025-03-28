@@ -2,7 +2,17 @@ import React from "react";
 import { Heart, ThumbsDown, Eye, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const Post = ({ id, title, body, views, likes, dislikes, tags }) => {
+const Post = ({
+  routes,
+  homeRoutes,
+  id,
+  title,
+  body,
+  views,
+  likes,
+  dislikes,
+  tags,
+}) => {
   return (
     <>
       <div className="post-preview">
@@ -12,7 +22,13 @@ const Post = ({ id, title, body, views, likes, dislikes, tags }) => {
         <div className="post-preview-body">
           <p>{body}</p>
         </div>
-        <Link to={`/home/post/${id}`} className="navbar-item">
+        <Link
+          to={`${routes.HOME.replace("/*", "")}${homeRoutes.POST.replace(
+            ":id",
+            id
+          )}`}
+          className="navbar-item"
+        >
           <span>More details</span> <ArrowRight />
         </Link>
         <div className="post-preview-tags">

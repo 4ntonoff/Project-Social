@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Registration = () => {
+const Registration = ({ routes }) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,9 +10,9 @@ const Registration = () => {
 
   useEffect(() => {
     if (localStorage.getItem("user")) {
-      navigate("/home");
+      navigate(routes.HOME.replace("*", ""));
     }
-  }, [navigate]);
+  });
 
   const validateEmail = (email) => {
     const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -30,7 +30,7 @@ const Registration = () => {
       return;
     }
     localStorage.setItem("user", JSON.stringify({ name, email }));
-    navigate("/home");
+    navigate(routes.HOME.replace("*", ""));
   };
 
   return (

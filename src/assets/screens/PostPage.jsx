@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { ArrowLeft, Heart, ThumbsDown, Eye } from "lucide-react";
 
-const PostPage = () => {
+const PostPage = ({ routes, homeRoutes }) => {
   // TODO: read about useParams
   const { id } = useParams();
   const [post, setPost] = useState(null);
@@ -38,7 +38,7 @@ const PostPage = () => {
   return (
     <div className="post-page">
       <div className="post-page-back">
-        <Link to="/">
+        <Link to={`${routes.HOME.replace("/*", "")}${homeRoutes.FEED}`}>
           <ArrowLeft className="post-page-back-arrow" size={24} />
         </Link>
         <span className="post-page-back-text">Post</span>

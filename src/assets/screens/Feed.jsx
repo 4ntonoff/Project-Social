@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Post from "../components/Post";
 
-const Feed = () => {
+const Feed = ({ routes, homeRoutes }) => {
   const [posts, setPosts] = useState(null);
   const [tag, setTag] = useState(null);
   const [selectedTag, setSelectedTag] = useState(null);
@@ -16,7 +16,6 @@ const Feed = () => {
       console.error("Error loading data:", error);
     }
   }
-  ("https://dummyjson.com/posts/tag-list");
 
   useEffect(() => {
     getPosts();
@@ -55,6 +54,8 @@ const Feed = () => {
       </div>
       {filteredPosts.map((post) => (
         <Post
+          routes={routes}
+          homeRoutes={homeRoutes}
           key={post.id}
           id={post.id}
           title={post.title}

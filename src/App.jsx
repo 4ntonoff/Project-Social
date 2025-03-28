@@ -4,17 +4,25 @@ import Registration from "./assets/screens/Registration";
 import Home from "./assets/screens/Home";
 import ProtectedRoute from "./assets/screens/ProtectedRoute";
 
+const ROUTES = {
+  REGISTRATION: "/",
+  HOME: "/ho/*",
+};
+
 function App() {
   return (
     <>
       <Router basename="/Project-Social">
         <Routes>
-          <Route path="/" element={<Registration />} />
           <Route
-            path="/home/*"
+            path={ROUTES.REGISTRATION}
+            element={<Registration routes={ROUTES} />}
+          />
+          <Route
+            path={ROUTES.HOME}
             element={
-              <ProtectedRoute>
-                <Home />
+              <ProtectedRoute routes={ROUTES}>
+                <Home routes={ROUTES} />
               </ProtectedRoute>
             }
           />

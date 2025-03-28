@@ -5,15 +5,30 @@ import Feed from "./Feed";
 import Stats from "./Stats";
 import PostPage from "./PostPage";
 
-const Home = () => {
+const HOMEROUTES = {
+  FEED: "/",
+  POST: "/post/:id",
+  STATS: "/stats",
+};
+
+const Home = ({ routes }) => {
   return (
     <div className="home">
-      <Navbar />
+      <Navbar routes={routes} homeRoutes={HOMEROUTES} />
       <div className="content">
         <Routes>
-          <Route path="/" element={<Feed />} />
-          <Route path="post/:id" element={<PostPage />} />
-          <Route path="stats" element={<Stats />} />
+          <Route
+            path={HOMEROUTES.FEED}
+            element={<Feed routes={routes} homeRoutes={HOMEROUTES} />}
+          />
+          <Route
+            path={HOMEROUTES.POST}
+            element={<PostPage routes={routes} homeRoutes={HOMEROUTES} />}
+          />
+          <Route
+            path={HOMEROUTES.STATS}
+            element={<Stats routes={routes} homeRoutes={HOMEROUTES} />}
+          />
         </Routes>
       </div>
     </div>
