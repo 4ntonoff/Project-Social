@@ -6,7 +6,6 @@ const Feed = ({ routes, homeRoutes }) => {
   const [posts, setPosts] = useState(null);
   const [tag, setTag] = useState(null);
   const [selectedTag, setSelectedTag] = useState(null);
-  let tags = [];
 
   async function getPosts() {
     try {
@@ -25,13 +24,7 @@ const Feed = ({ routes, homeRoutes }) => {
     return <div className="loader"></div>;
   }
 
-  posts.forEach((post) => {
-    post.tags.forEach((tag) => {
-      if (!tags.includes(tag)) {
-        tags.push(tag);
-      }
-    });
-  });
+  const tags = Array.from(new Set(posts.flatMap((post) => post.tags)));
 
   let filteredPosts = tag
     ? posts.filter((post) => post.tags.includes(tag))
