@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 import axios from "axios";
 import BarChart from "../components/BarChart";
 
 const Stats = () => {
-  let likes = 0;
-  let dislikes = 0;
-  let views = 0;
   ChartJS.register(ArcElement, Tooltip, Legend);
   const [posts, setPosts] = useState(null);
   async function getPosts() {
@@ -23,15 +20,32 @@ const Stats = () => {
     getPosts();
   }, []);
 
+  const likesData = useMemo(
+    () => posts?.map((post) => post.reactions.likes) || [],
+    [posts]
+  );
+  const dislikesData = useMemo(
+    () => posts?.map((post) => post.reactions.dislikes) || [],
+    [posts]
+  );
+  const viewsData = useMemo(
+    () => posts?.map((post) => post.views) || [],
+    [posts]
+  );
+
   if (!posts) {
     return <div className="loader"></div>;
   }
 
-  posts.forEach((post) => {
-    likes += post.reactions.likes;
-    dislikes += post.reactions.dislikes;
-    views += post.views;
-  });
+  const { likes, dislikes, views } = posts.reduce(
+    (acc, post) => {
+      acc.likes += post.reactions.likes;
+      acc.dislikes += post.reactions.dislikes;
+      acc.views += post.views;
+      return acc;
+    },
+    { likes: 0, dislikes: 0, views: 0 }
+  );
 
   const options = {
     responsive: true,
@@ -50,7 +64,8 @@ const Stats = () => {
       },
     },
   };
-  let PieChartData = {
+
+  const PieChartData = {
     labels: ["Likes", "Dislikes", "Views"],
     datasets: [
       {
@@ -62,10 +77,6 @@ const Stats = () => {
       },
     ],
   };
-
-  const likesData = posts.map((post) => post.reactions.likes);
-  const dislikesData = posts.map((post) => post.reactions.dislikes);
-  const viewsData = posts.map((post) => post.views);
 
   return (
     <div className="stats">
