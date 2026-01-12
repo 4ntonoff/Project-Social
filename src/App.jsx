@@ -4,6 +4,8 @@ import Registration from "./assets/screens/Registration";
 import Home from "./assets/screens/Home";
 import ProtectedRoute from "./assets/screens/ProtectedRoute";
 
+const BASENAME = (import.meta.env.VITE_BASE || "/").replace(/\/+$|^$/, "");
+
 const ROUTES = {
   REGISTRATION: "/",
   HOME: "/ho/*",
@@ -12,7 +14,8 @@ const ROUTES = {
 function App() {
   return (
     <>
-      <Router basename="/Project-Social">
+      {/* Strip trailing slash so BrowserRouter basename matches Vite base */}
+      <Router basename={BASENAME || "/"}>
         <Routes>
           <Route
             path={ROUTES.REGISTRATION}
